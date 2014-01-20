@@ -58,7 +58,7 @@ def service_lives():
 
 @app.route("/register", methods=["PUT"])
 def register():
-    connect("cheapgas", host = "mongodb://gpatrick:password@alex.mongohq.com:10071/app8347627")
+    connect("sns", host = "")
     #if request.method == "PUT":
     userJSON = json.loads(request.data)
     user = userJSON["username"]
@@ -76,7 +76,7 @@ def register():
     
 @app.route("/login", methods=["PUT"])
 def login():
-    connect("cheapgas", host = "mongodb://gpatrick:password@alex.mongohq.com:10071/app8347627")
+    connect("sns", host = "")
     print request.data
     
     credentials = unicode(request.data).strip()
@@ -103,7 +103,7 @@ def login():
         return Response(status=401)
 
 def authenticateUser(userToken):
-    connect("cheapgas", host = "mongodb://gpatrick:password@alex.mongohq.com:10071/app8347627")
+    connect("sns", host = "")
     token = request.headers.get("Token")
     if(userToken == None):
         return 412
@@ -119,7 +119,7 @@ def authenticateUser(userToken):
     
 @app.route("/users", methods=["GET"])
 def users():
-    connect("cheapgas", host = "mongodb://gpatrick:password@alex.mongohq.com:10071/app8347627")
+    connect("sns", host = "")
     token = request.headers.get("Token")
     authStatus = authenticateUser(token)
     if(authStatus == 412):
@@ -139,7 +139,7 @@ def users():
 
 @app.route("/users/<userID>", methods=["GET"])
 def user(userID):
-    connect("cheapgas", host = "mongodb://gpatrick:password@alex.mongohq.com:10071/app8347627")
+    connect("sns", host = "")
     token = request.headers.get("Token")
     authStatus = authenticateUser(token)
     if(authStatus == 412):
@@ -160,7 +160,7 @@ def user(userID):
 
 @app.route("/users/<userID>/favorites/<theArticleID>", methods=["POST"])
 def favorite(userID, theArticleID):
-    connect("cheapgas", host = "mongodb://gpatrick:password@alex.mongohq.com:10071/app8347627")
+    connect("sns", host = "")
     token = request.headers.get("Token")
     authStatus = authenticateUser(token)
     if(authStatus == 412):
@@ -183,7 +183,7 @@ def favorite(userID, theArticleID):
 
 @app.route("/users/<userID>/comments/<theArticleID>", methods=["GET", "POST"])
 def comment(userID, theArticleID):
-    connect("cheapgas", host = "mongodb://gpatrick:password@alex.mongohq.com:10071/app8347627")
+    connect("sns", host = "")
     token = request.headers.get("Token")
     authStatus = authenticateUser(token)
     if(authStatus == 412):
@@ -220,7 +220,7 @@ def comment(userID, theArticleID):
 
 @app.route("/articles/categories", methods=["GET"])
 def categories():
-    connect("cheapgas", host = "mongodb://gpatrick:password@alex.mongohq.com:10071/app8347627")
+    connect("sns", host = "")
     token = request.headers.get("Token")
     authStatus = authenticateUser(token)
     if(authStatus == 412):
@@ -246,7 +246,7 @@ def categories():
     
 @app.route("/articles/categories/<theCategoryID>", methods=["GET"])
 def articles(theCategoryID):
-    connect("cheapgas", host = "mongodb://gpatrick:password@alex.mongohq.com:10071/app8347627")
+    connect("sns", host = "")
     token = request.headers.get("Token")
     authStatus = authenticateUser(token)
     if(authStatus == 412):
@@ -311,7 +311,7 @@ def articles(theCategoryID):
     
 @app.route("/articles/<theArticleID>", methods=["GET"])
 def article(theArticleID):
-    connect("cheapgas", host = "mongodb://gpatrick:password@alex.mongohq.com:10071/app8347627")
+    connect("sns", host = "")
     token = request.headers.get("Token")
     authStatus = authenticateUser(token)
     if(authStatus == 412):
